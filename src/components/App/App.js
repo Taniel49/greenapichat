@@ -94,7 +94,7 @@ function App() {
         }).then((res) => {
             return res.json();
         }).then((res) => {
-            response=res;
+            response = res;
         }).catch((err) => {
             errorHandler();
             console.log(err);

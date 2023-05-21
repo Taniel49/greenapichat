@@ -13,6 +13,7 @@ function Chat(props) {
 
     return (
         <div>
+            <button onClick={props.quitChat}>Выйти из чата</button>
             {
                 props.list.map((message) =>
                     <Message

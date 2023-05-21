@@ -12,6 +12,7 @@ function ChatCreator(props) {
 
     return (
         <div>
+            <button onClick={props.handleLogout}>Сменить аккаунт</button>
             <h1>Введите номер</h1>
             <form onSubmit={handleSubmit}>
                 <label>Введите номер</label>

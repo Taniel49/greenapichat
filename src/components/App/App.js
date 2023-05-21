@@ -16,9 +16,9 @@ function App() {
 
     React.useEffect(() => {
         if (isLoggedIn) {
-            navigate('/createchat')
+            navigate('/createchat');
         } else {
-            navigate('/')
+            navigate('/');
         }
     }, [isLoggedIn]);
 
@@ -171,7 +171,19 @@ function App() {
 
     function handleNumber(number) {
         setNumber(number);
-        navigate('/chat')
+        navigate('/chat');
+    }
+
+    function quitChat(){
+        setNumber(false);
+        navigate('/createchat');
+    }
+
+    function handleLogout(){
+        setIsLoggedIn(false);
+        setIdInstance('');
+        setApiTokenInstance('');
+        navigate('/');
     }
 
     function errorHandler(errMassage = 'Непредвиденная ошибка') {
@@ -197,12 +209,14 @@ function App() {
                                                 onClose={closePopup}
                                                 caption={errorMassage}/>}/>
                 <Route path="/createchat" element={<ChatCreator onNumber={handleNumber}
+                                                                handleLogout={handleLogout}
                                                                 isOpen={isOpenPopup}
                                                                 onClose={closePopup}
                                                                 caption={errorMassage}/>}/>
                 <Route path="/chat" element={<Chat sendMessage={sendMessage}
                                                    list={messageList}
                                                    number={number}
+                                                   quitChat={quitChat}
                                                    isOpen={isOpenPopup}
                                                    onClose={closePopup}
                                                    caption={errorMassage}/>}/>

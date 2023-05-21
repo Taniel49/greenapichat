@@ -85,16 +85,22 @@ function App() {
     }
 
     function receiveNotification() {
+        let response;
+
         fetch(`https://api.green-api.com/waInstance${idInstance}/ReceiveNotification/${apiTokenInstance}`, {
             method: `GET`, headers: {
                 'Content-Type': `application/json`
             }
         }).then((res) => {
             return res.json();
+        }).then((res) => {
+            response=res;
         }).catch((err) => {
             errorHandler();
             console.log(err);
         });
+
+        return response;
     }
 
     function deleteNotification(receiptId) {

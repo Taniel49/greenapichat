@@ -1,0 +1,7 @@
+/*  popup  */
+@import url("./components/InfoTooltip/popup.css");
+@import url("./components/InfoTooltip/__container/popup__container.css");
+@import url("./components/InfoTooltip/_opened/popup_opened.css");
+@import url("./components/InfoTooltip/__info-tooltip/popup__info-tooltip.css");
+@import url("./components/InfoTooltip/__info-tooltip/_caption/popup__info-tooltip_caption.css");
+@import url("./components/InfoTooltip/__close-button/popup__close-button.css");

@@ -1,5 +1,4 @@
 import React from 'react';
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import Message from "../Message/Message";
 
 function Chat(props) {
@@ -26,9 +25,6 @@ function Chat(props) {
                 <input ref={messageRef}/>
                 <button type={"submit"}>Отправить сообщение</button>
             </form>
-            <InfoTooltip isOpen={props.isOpen}
-                         onClose={props.onClose}
-                         caption={props.caption}/>
         </div>
     );
 }

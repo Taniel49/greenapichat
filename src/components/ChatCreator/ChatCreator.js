@@ -1,5 +1,4 @@
 import React from 'react';
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
 function ChatCreator(props) {
     const numberRef = React.useRef('');
@@ -19,9 +18,6 @@ function ChatCreator(props) {
                 <input ref={numberRef}/>
                 <button type={"submit"}>Создать чат</button>
             </form>
-            <InfoTooltip isOpen={props.isOpen}
-                         onClose={props.onClose}
-                         caption={props.caption}/>
         </div>
     );
 }

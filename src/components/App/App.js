@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import LogIn from "../LogIn/LogIn";
 import ChatCreator from "../ChatCreator/ChatCreator";
 import Chat from "../Chat/Chat";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
 function App() {
     const navigate = useNavigate()
@@ -13,6 +14,8 @@ function App() {
     const [errorMassage, setErrorMassage] = React.useState('');
     const [isOpenPopup, setIsOpenPopup] = React.useState(false);
     const [messageList, setMessageList] = React.useState([]);
+    const reference = useRef();
+    reference.current = number;
 
     React.useEffect(() => {
         if (isLoggedIn) {
@@ -23,10 +26,12 @@ function App() {
     }, [isLoggedIn]);
 
     React.useEffect(() => {
+
         if (number) {
             getChat();
             handleNotifications();
         }
+
     }, [number]);
 
 
@@ -85,22 +90,16 @@ function App() {
     }
 
     function receiveNotification() {
-        let response;
-
-        fetch(`https://api.green-api.com/waInstance${idInstance}/ReceiveNotification/${apiTokenInstance}`, {
+        return fetch(`https://api.green-api.com/waInstance${idInstance}/ReceiveNotification/${apiTokenInstance}`, {
             method: `GET`, headers: {
                 'Content-Type': `application/json`
             }
         }).then((res) => {
             return res.json();
-        }).then((res) => {
-            response = res;
         }).catch((err) => {
             errorHandler();
             console.log(err);
         });
-
-        return response;
     }
 
     function deleteNotification(receiptId) {
@@ -143,14 +142,13 @@ function App() {
 
     async function handleNotifications() {
         try {
-            console.log("Waiting incoming notifications...");
-            let response
-            while (response = await receiveNotification()) {
-                console.log("в цикле")
+            while (reference.current) {
+                let response = await receiveNotification();
+                if (response === null) {
+                    continue
+                }
                 if (response.body.typeWebhook === 'incomingMessageReceived') {
-                    console.log('incomingMessageReceived');
-                    let newArray = [...messageList];
-                    setMessageList([...newArray, {
+                    setMessageList([...messageList, {
                         text: response.body.messageData.textMessageData.textMessage,
                         _id: response.body.idMessage,
                         sender: 'incoming'
@@ -158,10 +156,13 @@ function App() {
                     await deleteNotification(response.receiptId);
                 } else if (response.body.typeWebhook === 'stateInstanceChanged') {
                     console.log('stateInstanceChanged')
+                    await deleteNotification(response.receiptId);
                 } else if (response.body.typeWebhook === 'outgoingMessageStatus') {
                     console.log('outgoingMessageStatus')
+                    await deleteNotification(response.receiptId);
                 } else if (response.body.typeWebhook === 'deviceInfo') {
                     console.log('deviceInfo')
+                    await deleteNotification(response.receiptId);
                 }
             }
         } catch (ex) {
@@ -174,12 +175,12 @@ function App() {
         navigate('/chat');
     }
 
-    function quitChat(){
+    function quitChat() {
         setNumber(false);
         navigate('/createchat');
     }
 
-    function handleLogout(){
+    function handleLogout() {
         setIsLoggedIn(false);
         setIdInstance('');
         setApiTokenInstance('');
@@ -205,22 +206,19 @@ function App() {
         <div>
             <Routes>
                 <Route path="/" element={<LogIn onLogin={handleLogin}
-                                                isOpen={isOpenPopup}
-                                                onClose={closePopup}
-                                                caption={errorMassage}/>}/>
+                />}/>
                 <Route path="/createchat" element={<ChatCreator onNumber={handleNumber}
                                                                 handleLogout={handleLogout}
-                                                                isOpen={isOpenPopup}
-                                                                onClose={closePopup}
-                                                                caption={errorMassage}/>}/>
+                />}/>
                 <Route path="/chat" element={<Chat sendMessage={sendMessage}
                                                    list={messageList}
                                                    number={number}
                                                    quitChat={quitChat}
-                                                   isOpen={isOpenPopup}
-                                                   onClose={closePopup}
-                                                   caption={errorMassage}/>}/>
+                />}/>
             </Routes>
+            <InfoTooltip isOpen={isOpenPopup}
+                         onClose={closePopup}
+                         caption={errorMassage}/>
         </div>
     );
 }

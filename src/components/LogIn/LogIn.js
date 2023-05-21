@@ -1,5 +1,4 @@
 import React from 'react';
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
 function LogIn(props) {
     const idRef = React.useRef('');
@@ -22,9 +21,6 @@ function LogIn(props) {
                 <button type={"submit"}>Войти</button>
             </form>
             <p>Для регистрации и решения возможных проблем с аккаунтом перейдите на сайт <a href="https://green-api.com/" target="_blank">GreenAPI</a></p>
-            <InfoTooltip isOpen={props.isOpen}
-                         onClose={props.onClose}
-                         caption={props.caption}/>
         </div>
     );
 }

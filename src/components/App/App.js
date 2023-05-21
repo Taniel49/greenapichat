@@ -56,15 +56,16 @@ function App() {
             method: `POST`, headers: {
                 'Content-Type': `application/json`
             },
-            body: {
+            body: JSON.stringify({
                 'chatId': `${number}`,
                 'message': `${text}`
-            }
+            })
         }).catch((err) => {
             errorHandler();
             console.log(err);
         });
     }
+
 
     function handleNumber(number) {
         setNumber(number);

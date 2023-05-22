@@ -60,35 +60,6 @@ function App() {
         }
     }
 
-    /*     fetch(`https://api.green-api.com/waInstance${id}/getStateInstance/${token}`, {
-             method: `GET`, headers: {
-                 'Content-Type': `application/json`
-             }
-         }).then((res) => {
-             return res.json()
-         }).then((res) => {
-             if (res.stateInstance === 'authorized') {
-                 setIdInstance(id);
-                 setApiTokenInstance(token);
-                 setIsLoggedIn(true);
-                 console.log('success');
-             } else if (res.stateInstance === 'notAuthorized') {
-                 errorHandler('Аккаунт не авторизован');
-             } else if (res.stateInstance === 'blocked') {
-                 errorHandler('Аккаунт заблокирован');
-             } else if (res.stateInstance === 'sleepMode') {
-                 errorHandler('Аккаунт в спящем режиме');
-             } else if (res.stateInstance === 'starting') {
-                 errorHandler('Аккаунт в процессе запуска');
-             } else {
-                 errorHandler();
-             }
-         }).catch((err) => {
-             errorHandler();
-             console.log(err);
-         });
-     }*/
-
     async function sendMessage(text) {
         try {
             let response = await postMessage(idInstance, apiTokenInstance, number, text);
@@ -105,30 +76,6 @@ function App() {
         }
     }
 
-    /*function sendMessage(text) {
-        fetch(`https://api.green-api.com/waInstance${idInstance}/SendMessage/${apiTokenInstance}`, {
-            method: `POST`, headers: {
-                'Content-Type': `application/json`
-            },
-            body: JSON.stringify({
-                'chatId': `${number}`,
-                'message': `${text}`
-            })
-        }).then((res) => {
-            return res.json();
-        }).then((res) => {
-            let newArray = [...messageList];
-            setMessageList([...newArray, {
-                text: text,
-                _id: res.idMessage,
-                sender: 'outgoing'
-            }])
-        }).catch((err) => {
-            errorHandler();
-            console.log(err);
-        });
-    }*/
-
     async function receiveNotification() {
         try {
             let response = await getNotification(idInstance, apiTokenInstance);
@@ -139,19 +86,6 @@ function App() {
         }
     }
 
-    /*function receiveNotification() {
-        return fetch(`https://api.green-api.com/waInstance${idInstance}/ReceiveNotification/${apiTokenInstance}`, {
-            method: `GET`, headers: {
-                'Content-Type': `application/json`
-            }
-        }).then((res) => {
-            return res.json();
-        }).catch((err) => {
-            errorHandler();
-            console.log(err);
-        });
-    }*/
-
     async function deleteNotification(receiptId) {
         try {
             let response = await delNotification(idInstance, apiTokenInstance, receiptId);
@@ -161,17 +95,6 @@ function App() {
             console.log(e);
         }
     }
-
-    /*function deleteNotification(receiptId) {
-        fetch(`https://api.green-api.com/waInstance${idInstance}/DeleteNotification/${apiTokenInstance}/${receiptId}`, {
-            method: `DELETE`, headers: {
-                'Content-Type': `application/json`
-            }
-        }).catch((err) => {
-            errorHandler();
-            console.log(err);
-        });
-    }*/
 
     async function getChat() {
         try {
@@ -191,33 +114,6 @@ function App() {
             console.log(e);
         }
     }
-
-    /*function getChat() {
-        fetch(`https://api.green-api.com/waInstance${idInstance}/GetChatHistory/${apiTokenInstance}`, {
-            method: `POST`, headers: {
-                'Content-Type': `application/json`
-            },
-            body: JSON.stringify({
-                'chatId': `${number}`,
-                "count": 10
-            })
-        }).then((res) => {
-            return res.json()
-        }).then((res) => {
-            let list = [];
-            res.forEach((message) => {
-                list = [{
-                    text: message.textMessage,
-                    _id: message.idMessage,
-                    sender: message.type
-                }, ...list]
-            });
-            setMessageList(list);
-        }).catch((err) => {
-            errorHandler();
-            console.log(err);
-        });
-    }*/
 
     async function handleNotifications() {
         try {
@@ -244,8 +140,9 @@ function App() {
                     await deleteNotification(response.receiptId);
                 }
             }
-        } catch (ex) {
-            console.error(ex)
+        } catch (e) {
+            errorHandler();
+            console.log(e);
         }
     }
 

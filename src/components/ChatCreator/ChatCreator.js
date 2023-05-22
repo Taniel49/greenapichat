@@ -18,6 +18,8 @@ function ChatCreator(props) {
                 <input ref={numberRef}/>
                 <button type={"submit"}>Создать чат</button>
             </form>
+            <p>Информация о формате номера - <a href='https://green-api.com/docs/api/chat-id/' target="_blank">Идентификатор
+                чата</a></p>
         </div>
     );
 }

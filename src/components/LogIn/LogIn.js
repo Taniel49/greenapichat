@@ -4,7 +4,7 @@ function LogIn(props) {
     const idRef = React.useRef('');
     const tokenRef = React.useRef('');
 
-    function handleSubmit (evt){
+    function handleSubmit(evt) {
         evt.preventDefault();
 
         props.onLogin(idRef.current.value, tokenRef.current.value);
@@ -20,7 +20,8 @@ function LogIn(props) {
                 <input ref={tokenRef}/>
                 <button type={"submit"}>Войти</button>
             </form>
-            <p>Для регистрации и решения возможных проблем с аккаунтом перейдите на сайт <a href="https://green-api.com/" target="_blank">GreenAPI</a></p>
+            <p>Для регистрации и решения возможных проблем с аккаунтом перейдите на сайт <a
+                href="https://green-api.com/" target="_blank">GreenAPI</a></p>
         </div>
     );
 }

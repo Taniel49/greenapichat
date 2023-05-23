@@ -1,3 +1,4 @@
+import './App.css';
 import React, {useRef} from 'react';
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import LogIn from "../LogIn/LogIn";
@@ -16,8 +17,11 @@ function App() {
     const [isOpenPopup, setIsOpenPopup] = React.useState(false);
     const [messageList, setMessageList] = React.useState([]);
     const chatMessagesNumber = 10;
-    const reference = useRef();
-    reference.current = number;
+    const numberRef = useRef();
+    const chatRef = useRef();
+    numberRef.current = number;
+    chatRef.current = messageList;
+
 
     React.useEffect(() => {
         if (isLoggedIn) {
@@ -117,13 +121,13 @@ function App() {
 
     async function handleNotifications() {
         try {
-            while (reference.current) {
+            while (numberRef.current) {
                 let response = await receiveNotification();
                 if (response === null) {
                     continue
                 }
                 if (response.body.typeWebhook === 'incomingMessageReceived') {
-                    setMessageList([...messageList, {
+                    setMessageList([...chatRef.current, {
                         text: response.body.messageData.textMessageData.textMessage,
                         _id: response.body.idMessage,
                         sender: 'incoming'
@@ -179,18 +183,18 @@ function App() {
     }
 
     return (
-        <div>
+        <div className="page">
             <Routes>
-                <Route path="/" element={<LogIn onLogin={handleLogin}
-                />}/>
+                <Route path="/" element={<LogIn onLogin={handleLogin}/>}
+                />
                 <Route path="/createchat" element={<ChatCreator onNumber={handleNumber}
-                                                                handleLogout={handleLogout}
-                />}/>
+                                                                handleLogout={handleLogout}/>}
+                />
                 <Route path="/chat" element={<Chat sendMessage={sendMessage}
                                                    list={messageList}
                                                    number={number}
-                                                   quitChat={quitChat}
-                />}/>
+                                                   quitChat={quitChat}/>}
+                />
             </Routes>
             <InfoTooltip isOpen={isOpenPopup}
                          onClose={closePopup}

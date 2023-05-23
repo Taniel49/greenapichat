@@ -11,16 +11,17 @@ function LogIn(props) {
     }
 
     return (
-        <div>
-            <h1>Введите данные аккаунта GreenAPI</h1>
-            <form onSubmit={handleSubmit}>
-                <label>IdInstance</label>
-                <input ref={idRef}/>
-                <label>ApiTokenInstance</label>
-                <input ref={tokenRef}/>
-                <button type={"submit"}>Войти</button>
+        <div className='sign'>
+            <h1 className='sign__header'>Введите данные аккаунта GreenAPI</h1>
+            <form className='sign__form' onSubmit={handleSubmit}>
+                <label className='sign__text'>IdInstance</label>
+                <input className='sign__form_input' ref={idRef}/>
+                <label className='sign__text'>ApiTokenInstance</label>
+                <input className='sign__form_input' ref={tokenRef}/>
+                <button className='sign__form_submit-button' type={"submit"}>Войти</button>
             </form>
-            <p>Для регистрации и решения возможных проблем с аккаунтом перейдите на сайт <a
+            <p className='sign__text'>Для регистрации и решения возможных проблем с аккаунтом перейдите на сайт <a
+                className='sign__link'
                 href="https://green-api.com/" target="_blank">GreenAPI</a></p>
         </div>
     );

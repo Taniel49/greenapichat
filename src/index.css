@@ -5,3 +5,12 @@
 @import url("./components/InfoTooltip/__info-tooltip/popup__info-tooltip.css");
 @import url("./components/InfoTooltip/__info-tooltip/_caption/popup__info-tooltip_caption.css");
 @import url("./components/InfoTooltip/__close-button/popup__close-button.css");
+
+/* form */
+@import url("blocks/sign/sign.css");
+@import url("blocks/sign/__form/sign__form.css");
+@import url("blocks/sign/__form/_input/sign__form_input.css");
+@import url("blocks/sign/__form/_submit-button/sign__form_submit-button.css");
+@import url("blocks/sign/__header/sign__header.css");
+@import url("blocks/sign/__text/sign__text.css");
+@import url("blocks/sign/__link/sign__link.css");

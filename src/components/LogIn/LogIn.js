@@ -18,7 +18,7 @@ function LogIn(props) {
                 <input className='sign__form_input' ref={idRef}/>
                 <label className='sign__text'>ApiTokenInstance</label>
                 <input className='sign__form_input' ref={tokenRef}/>
-                <button className='sign__form_submit-button' type={"submit"}>Войти</button>
+                <button className='sign__form_button' type={"submit"}>Войти</button>
             </form>
             <p className='sign__text'>Для регистрации и решения возможных проблем с аккаунтом перейдите на сайт <a
                 className='sign__link'

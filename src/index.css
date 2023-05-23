@@ -10,7 +10,13 @@
 @import url("blocks/sign/sign.css");
 @import url("blocks/sign/__form/sign__form.css");
 @import url("blocks/sign/__form/_input/sign__form_input.css");
-@import url("blocks/sign/__form/_submit-button/sign__form_submit-button.css");
+@import url("blocks/sign/__form/_button/sign__form_button.css");
 @import url("blocks/sign/__header/sign__header.css");
 @import url("blocks/sign/__text/sign__text.css");
 @import url("blocks/sign/__link/sign__link.css");
+
+/* chat */
+@import url("./components/Chat/chat.css");
+@import url("./components/Chat/__messages/chat__messages.css");
+@import url("./components/Message/message.css");
+@import url("./components/Message/_outgoing/message_outgoing.css");

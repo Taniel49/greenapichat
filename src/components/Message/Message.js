@@ -2,9 +2,9 @@ import React from 'react';
 
 function Message(props) {
     return (
-        <div>
-            <p>{props.text}</p>
-        </div>
+        <>
+            <p className= {`message ${props.sender==='outgoing'? 'message_outgoing':''}`}>{props.text}</p>
+        </>
     );
 }
 

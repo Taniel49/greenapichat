@@ -1,5 +1,5 @@
-.sign__form_submit-button{
-    font-size: 18px;
+.sign__form_button{
+    font-size: 22px;
     line-height: 22px;
     text-align: center;
     background-color: white;
@@ -10,7 +10,7 @@
     border-radius: 2px;
 }
 
-.sign__form_submit-button:hover{
+.sign__form_button:hover{
     transition: ease-in;
     opacity: 0.8;
     background-color:#43cd66;

@@ -1,0 +1,9 @@
+.message{
+    margin:10px 6px;
+    padding: 2px 6px;
+    background:white;
+    max-width: 336px;
+    border-radius: 10px;
+    align-self: flex-start;
+    overflow-wrap: break-word;
+}
